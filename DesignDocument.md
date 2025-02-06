@@ -17,6 +17,7 @@ classDiagram
     PayrollGenerator ..> FileUtil : uses
     PayrollGenerator ..> Builder : uses
     PayrollGenerator ..> IPayStub : uses
+    PayrollGenerator *-- Arguments : contains
     IEmployee ..> IPayStub : uses
     Builder ..> ITimeCard : creates
     Builder ..> IEmployee : creates
@@ -40,6 +41,7 @@ classDiagram
 
     }
     class ITimeCard{
+        <<interface>>
         + getEmployeeID() String
         + getHoursWorked() double
     }
@@ -102,6 +104,24 @@ classDiagram
         + TimeCard(String employeeID, double hoursWorked)
         + getEmployeeID() String
         + getHoursWorked() double
+    }
+    class PayrollGenerator {
+        - DEFAULT_EMPLOYEE_FILE: String
+        - DEFAULT_PAYROLL_FILE: String
+        - DEFAULT_TIME_CARD_FILE: String
+        - PayrollGenerator
+        + main(args: String[]) void
+    }
+    class Arguments {
+        - employeeFile: String
+        - payrollFile: String
+        - timeCards: String
+        - Arguments
+        + getEmployeeFile() String
+        + getPayrollFile() String
+        + getTimeCards() String
+        + printHelp() void
+        + process(args: String[]) Arguments
     }
 
 ```
