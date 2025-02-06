@@ -7,8 +7,104 @@ This document is meant to provide a tool for you to demonstrate the design proce
 ## (INITIAL DESIGN): Class Diagram
 
 Place your class diagram below. Make sure you check the fil in the browser on github.com to make sure it is rendering correctly. If it is not, you will need to fix it. As a reminder, here is a link to tools that can help you create a class diagram: [Class Resources: Class Design Tools](https://github.com/CS5004-khoury-lionelle/Resources?tab=readme-ov-file#uml-design-tools)
+```mermaid
+classDiagram
+    AbstractEmployee <|-- HourlyEmployee
+    AbstractEmployee <|-- SalaryEmployee
+    IEmployee <|.. AbstractEmployee : implements
+    IPayStub <|.. PayStub : implements
+    ITimeCard <|.. TimeCard : implements
+    PayrollGenerator ..> FileUtil : uses
+    PayrollGenerator ..> Builder : uses
+    PayrollGenerator ..> IPayStub : uses
+    IEmployee ..> IPayStub : uses
+    Builder ..> ITimeCard : creates
+    Builder ..> IEmployee : creates
+    class IEmployee {
+        <<interface>>
+        + getName() String
+        + getID() String
+        + getPayRate() double
+        + getEmployeeType() String
+        + getYTDEarnings() double
+        + getYTDTaxesPaid() double
+        + getPretaxDeductions() double
+        + runPayroll(double hoursWorked) IPayStub
+        + toCSV() String
+    }
+    class IPayStub {
+        <<interface>>
+        + getPay() double
+        + getTaxesPaid() double
+        + toCSV() String
 
+    }
+    class ITimeCard{
+        + getEmployeeID() String
+        + getHoursWorked() double
+    }
+    class FileUtil{
+        - FileUtil
+        + static final String EMPLOYEE_HEADER()
+        + static final String PAY_STUB_HEADER()
+        + static readFileToList(String file) List~String~
+        + static writeFile(String outFile, List<String> lines) void
+        + static writeFile(String outFile, List<String> lines, boolean backup) void
+    }
+    class Builder{
+        - Builder
+        + static buildEmployeeFromCSV(String csv) IEmployee
+        + static buildTimeCardFromCSV(String csv) ITimeCard 
 
+    }
+    class AbstractEmployee{
+        <<abstract>>
+        # name: String
+        # id: String
+        # payRate: double
+        # ytdEarnings: double
+        # ytdTaxesPaid: double
+        # pretaxDeductions: double
+        # calculateGrossPay: double
+        + getName() String
+        + getID() String
+        + getPayRate() double
+        + getEmployeeType() String
+        + getYTDEarnings() double
+        + getYTDTaxesPaid() double
+        + getPretaxDeductions() double
+        + runPayroll(hoursWorked: double) IPayStub
+    }
+    class HourlyEmployee{
+        # calculateGrossPay: double
+        + HourlyEmployee(String name, String id, double payRate, double ytdEarnings, double ytdTaxesPaid, double pretaxDeductions)
+        + getEmployeeType() String
+    }
+    class SalaryEmployee{
+        # calculateGrossPay: double
+        + SalaryEmployee(String name, String id, double payRate, double ytdEarnings, double ytdTaxesPaid, double pretaxDeductions)
+        + getEmployeeType() String
+    }
+    class PayStub{
+        - employeeName: String
+        - netPay: double
+        - taxesPaid: double
+        - ytdEarnings: double
+        - ytdTaxesPaid: double
+        + PayStub(String employeeName, double netPay, double taxesPaid, double ytdEarnings, double ytdTaxesPaid)
+        + getPay() double
+        + getTaxesPaid() double
+        + toCSV() String
+    }
+    class TimeCard {
+        - employeeID: String
+        - hoursWorked: double
+        + TimeCard(String employeeID, double hoursWorked)
+        + getEmployeeID() String
+        + getHoursWorked() double
+    }
+
+```
 
 
 
