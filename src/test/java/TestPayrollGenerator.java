@@ -9,6 +9,7 @@
  */
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import student.PayrollGenerator;
@@ -53,7 +54,25 @@ public class TestPayrollGenerator {
         assertEquals(expectedPayStubs, actualPayStubs);
 
 
-        // you could also read lines and compared the lists
+        // you could also read lines and compared the list
+
+
+    }
+    @Test
+    public void testInvalidEmployeeFile() throws IOException {
+        Path employees = tempDir.resolve("employees_invalid.csv");
+        Files.copy(Paths.get("resources/employees_invalid.csv"), employees);
+        Path payStubs = tempDir.resolve("pay_stubs_invalid.csv");
+        String[] args = {"-e", employees.toString(), "-t", "resources/time_cards_non_positive.csv",
+                "-o", payStubs.toString()};
+        assertThrows(Exception.class, () -> PayrollGenerator.main(args));
+//        String expectedPayStubs = Files
+//                .readString(Paths.get("resources/pay_stubs_invalid.csv"));
+//        String actualPayStubs = Files.readString(payStubs);
+//        assertEquals(expectedPayStubs, actualPayStubs);
+
+
+
 
 
     }

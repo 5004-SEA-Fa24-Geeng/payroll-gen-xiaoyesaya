@@ -144,7 +144,8 @@ You should feel free to number your brainstorm.
 
 1. Test that the `Employee` class properly returns `name` from `getName()`
 2. Test that the `Employee` class properly returns `id` from `getId()`
-3. continue to add your brainstorm here (you don't need to super formal - this is a brainstorm) - yes, you can change the bullets above to something that fits your design.
+3. Test that the `Employee` class properly returns `payRate` from `getPayRate()`
+4. Test that the `Employee` class properly returns `employeeType` from `getEmployeeType()`
 
 
 

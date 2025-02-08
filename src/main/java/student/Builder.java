@@ -30,10 +30,36 @@ public final class Builder {
         String type = parts[0];
         String name = parts[1];
         String id = parts[2];
-        double payRate = Double.parseDouble(parts[3]);
-        double pretaxDeduction = Double.parseDouble(parts[4]);
-        double YTDEarnings = Double.parseDouble(parts[5]);
-        double YTDTaxesPaid = Double.parseDouble(parts[6]);
+        double payRate, pretaxDeduction, YTDEarnings, YTDTaxesPaid;
+        try{
+            payRate = Double.parseDouble(parts[3]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid pay rate");
+        }
+        try{
+            pretaxDeduction = Double.parseDouble(parts[4]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid pretax deduction");
+        }
+        try{
+            YTDEarnings = Double.parseDouble(parts[5]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid YTDEarnings");
+        }
+        try{
+            YTDTaxesPaid = Double.parseDouble(parts[6]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid YTDTaxesPaid");
+        }
+
+
+        if (type.equals("HOURLY")) {
+            return new HourlyEmployee(name, id, payRate, YTDEarnings, YTDTaxesPaid, pretaxDeduction);
+        } else if (type.equals("SALARY")) {
+            return new SalaryEmployee(name, id, payRate, YTDEarnings, YTDTaxesPaid, pretaxDeduction);
+        } else {
+            throw new IllegalArgumentException("Invalid type");
+        }
     }
 
 
@@ -51,6 +77,12 @@ public final class Builder {
             throw new IllegalArgumentException("Invalid CSV format");
         }
         String employeeID = parts[0];
-        double hoursWorked = Double.parseDouble(parts[1]);
+        double hoursWorked;
+        try{
+            hoursWorked = Double.parseDouble(parts[1]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid hours worked");
+        }
+        return new TimeCard(employeeID, hoursWorked);
     }
 }
