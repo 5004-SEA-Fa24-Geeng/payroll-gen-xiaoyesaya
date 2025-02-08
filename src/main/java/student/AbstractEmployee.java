@@ -1,4 +1,5 @@
 package student;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -7,82 +8,113 @@ import java.math.RoundingMode;
  *
  * This class implements common attributes and methods for all types of employees,
  * including calculation and data formatting.
- * It also defines an abstract method for calculating gross pay, which is implemented by subclasses.
+ * It also defines an abstract method for calculating gross pay, which must be implemented by subclasses.
  */
 public abstract class AbstractEmployee implements IEmployee {
-    /** Employee's name */
-    protected final String name;
-    /** Employee's ID */
-    protected final String id;
-    /** Employee's pay rate */
-    protected final double payRate;
-    /** Year-to-date earnings */
-    protected double YTDEarnings;
-    /** Year-to-date taxes paid */
-    protected double YTDTaxesPaid;
-    /** Pre-tax deductions */
-    protected final double pretaxDeductions;
-    /** Fixed tax rate of 22.65% */
+    /** Employee's name. */
+    private final String name;
+    /** Employee's ID. */
+    private final String id;
+    /** Employee's pay rate. */
+    private final double payRate;
+    /** Year-to-date earnings. */
+    private double ytdEarnings;
+    /** Year-to-date taxes paid. */
+    private double ytdTaxesPaid;
+    /** Pre-tax deductions. */
+    private final double pretaxDeductions;
+    /** Fixed tax rate of 22.65%. */
     private static final double TAX_RATE = 0.2265;
 
     /**
      * Constructs an AbstractEmployee with specified details.
      *
-     * @param name Employee's name
-     * @param id Employee's ID
-     * @param payRate Employee's pay rate (must be greater than 0)
-     * @param YTDEarnings Year-to-date earnings (cannot be negative)
-     * @param YTDTaxesPaid Year-to-date taxes paid (cannot be negative)
-     * @param pretaxDeductions Pre-tax deductions (cannot be negative)
-     * @throws IllegalArgumentException if any input is invalid
+     * @param name Employee's name.
+     * @param id Employee's ID.
+     * @param payRate Employee's pay rate (must be greater than 0).
+     * @param ytdEarnings Year-to-date earnings (cannot be negative).
+     * @param ytdTaxesPaid Year-to-date taxes paid (cannot be negative).
+     * @param pretaxDeductions Pre-tax deductions (cannot be negative).
+     * @throws IllegalArgumentException if any input is invalid.
      */
-    public AbstractEmployee(String name, String id, double payRate, double YTDEarnings, double YTDTaxesPaid, double pretaxDeductions) {
+    public AbstractEmployee(
+            String name, String id, double payRate, double ytdEarnings,
+            double ytdTaxesPaid, double pretaxDeductions) {
         if (payRate <= 0) {
-            throw new IllegalArgumentException("payRate must be greater than 0");
+            throw new IllegalArgumentException("payRate must be greater than 0.");
         }
-        if (YTDEarnings < 0) {
-            throw new IllegalArgumentException("YTDEarnings cannot be negative");
+        if (ytdEarnings < 0) {
+            throw new IllegalArgumentException("ytdEarnings cannot be negative.");
         }
-        if (YTDTaxesPaid < 0) {
-            throw new IllegalArgumentException("YTDTaxesPaid cannot be negative");
+        if (ytdTaxesPaid < 0) {
+            throw new IllegalArgumentException("ytdTaxesPaid cannot be negative.");
         }
         if (pretaxDeductions < 0) {
-            throw new IllegalArgumentException("pretaxDeductions cannot be negative");
+            throw new IllegalArgumentException("pretaxDeductions cannot be negative.");
         }
         this.name = name;
         this.id = id;
         this.payRate = payRate;
-        this.YTDEarnings = YTDEarnings;
-        this.YTDTaxesPaid = YTDTaxesPaid;
+        this.ytdEarnings = ytdEarnings;
+        this.ytdTaxesPaid = ytdTaxesPaid;
         this.pretaxDeductions = pretaxDeductions;
-
     }
 
+    /**
+     * Gets the employee's name.
+     *
+     * @return The employee's name.
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the employee's ID.
+     *
+     * @return The employee's ID.
+     */
     @Override
     public String getID() {
         return id;
     }
 
+    /**
+     * Gets the employee's pay rate.
+     *
+     * @return The pay rate.
+     */
     @Override
     public double getPayRate() {
         return payRate;
     }
 
+    /**
+     * Gets the employee's year-to-date earnings.
+     *
+     * @return The year-to-date earnings.
+     */
     @Override
     public double getYTDEarnings() {
-        return YTDEarnings;
+        return ytdEarnings;
     }
 
+    /**
+     * Gets the employee's year-to-date taxes paid.
+     *
+     * @return The year-to-date taxes paid.
+     */
     @Override
     public double getYTDTaxesPaid() {
-        return YTDTaxesPaid;
+        return ytdTaxesPaid;
     }
 
+    /**
+     * Gets the employee's pre-tax deductions.
+     *
+     * @return The pre-tax deductions.
+     */
     @Override
     public double getPretaxDeductions() {
         return pretaxDeductions;
@@ -91,8 +123,8 @@ public abstract class AbstractEmployee implements IEmployee {
     /**
      * Abstract method to calculate gross pay based on hours worked.
      *
-     * @param hoursWorked Number of hours worked in the pay period
-     * @return Gross pay for the period
+     * @param hoursWorked Number of hours worked in the pay period.
+     * @return Gross pay for the period.
      */
     protected abstract double calculateGrossPay(double hoursWorked);
 
@@ -103,8 +135,8 @@ public abstract class AbstractEmployee implements IEmployee {
      * Otherwise, it calculates gross pay, taxable income, taxes, and net pay,
      * and updates year-to-date earnings and taxes paid.
      *
-     * @param hoursWorked Number of hours worked
-     * @return A PayStub containing payroll details
+     * @param hoursWorked Number of hours worked.
+     * @return A PayStub containing payroll details.
      */
     @Override
     public IPayStub runPayroll(double hoursWorked) {
@@ -115,29 +147,29 @@ public abstract class AbstractEmployee implements IEmployee {
         double taxableIncome = round(Math.max(grossPay - pretaxDeductions, 0));
         double taxes = round(taxableIncome * TAX_RATE);
         double netPay = round(grossPay - pretaxDeductions - taxes);
-        YTDEarnings = round(YTDEarnings + netPay);
-        YTDTaxesPaid = round(YTDTaxesPaid + taxes);
-        return new PayStub(name, netPay, taxes, YTDEarnings, YTDTaxesPaid);
+        ytdEarnings = round(ytdEarnings + netPay);
+        ytdTaxesPaid = round(ytdTaxesPaid + taxes);
+        return new PayStub(name, netPay, taxes, ytdEarnings, ytdTaxesPaid);
     }
 
     /**
      * Converts the employee's data to a CSV string.
      *
-     * Format: employee_type,name,ID,payRate,pretaxDeductions,YTDEarnings,YTDTaxesPaid
+     * Format: employee_type,name,ID,payRate,pretaxDeductions,ytdEarnings,ytdTaxesPaid.
      *
-     * @return A CSV-formatted string representing the employee
+     * @return A CSV-formatted string representing the employee.
      */
     @Override
     public String toCSV() {
         return String.format("%s,%s,%s,%.2f,%.2f,%.2f,%.2f",
-                getEmployeeType(), name, id, payRate, pretaxDeductions, YTDEarnings, YTDTaxesPaid);
+                getEmployeeType(), name, id, payRate, pretaxDeductions, ytdEarnings, ytdTaxesPaid);
     }
 
     /**
      * Rounds a given double value to two decimal places using HALF_UP rounding mode.
      *
-     * @param value The value to be rounded
-     * @return The rounded value to two decimal places
+     * @param value The value to be rounded.
+     * @return The rounded value to two decimal places.
      */
     protected static double round(double value) {
         return new BigDecimal(value).setScale(2, RoundingMode.HALF_UP).doubleValue();
