@@ -5,32 +5,41 @@ This report helps you demonstrate your understanding of the concepts. You should
 ## Technical Questions
 
 1. What does CSV stand for? 
-   
 
+   CSV stands for comma-separated values. It is a file format used to store table of data, where each value is separated by a comma.
 2. Why would you declare `List<IEmployee>` instead of `ArrayList<HourlyEmployee>`?
+
+   Declaring List<IEmployee> instead of ArrayList<HourlyEmployee> allows for flexibility and polymorphism. This way, the list can store different types of employees (e.g., HourlyEmployee, SalariedEmployee), making the code more adaptable and easier to maintain.
 
 3. When you have one class referencing another object, such as storing that object as one of the attributes of the first class - what type of relationship is that called (between has-a and is-a)?
 
+   This type of relationship is called a has-a relationship. It means that one class contains an instance of another class as an attribute rather than inheriting from it.
+
 4. Can you provide an example of a has-a relationship in your code (if one exists)?
 
+   The AbstractEmployee class has a has-a relationship with the PayStub class since the runPayroll method creates and returns a PayStub object.
 
 5. Can you provide an example of an is-a relationship in your code (if one exists)?
 
-
+   There is a is-a relationship between HourlyEmployee and AbstractEmployee because HourlyEmployee extends AbstractEmployee. This means HourlyEmployee is-a type of AbstractEmployee.
 6. What is the difference between an interface and an abstract class?
 
-
+    While class can inherit from only one abstract class, it can implement multiple interfaces. Moreover, abstract class contain both abstract and concrete methods with detailed implementations. Interface only has abstract methods which force a class must implement.
+    
 7. What is the advantage of using an interface over an abstract class?
 
+   The advantage of using an interface over an abstract class is that a class can implement multiple interfaces but only can extend one abstract class. This allows for more flexibility and code reusability when different classes need to follow the same contract but are not related by inheritance.
 
 8. Is the following code valid or not? `List<int> numbers = new ArrayList<int>();`, explain why or why not. If not, explain how you can fix it. 
 
+    Not Valid. For java generics, primitive types are not allowed (in this case, int). Instead, we can use Integer, then it becomes: List<Integer> numbers = new ArrayList<Integer>() 
+9. Which class/method is described as the "driver" for your application?
 
-9. Which class/method is described as the "driver" for your application? 
-
-
+   The main method insides the main program (in this program: PayrollGenerator) is the driver.
 
 10. How do you create a temporary folder for JUnit Testing? 
+
+    We can create a temporary folder using @TempDir annotation.
 
 
 ## Deeper Thinking 

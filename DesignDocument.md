@@ -146,6 +146,20 @@ You should feel free to number your brainstorm.
 2. Test that the `Employee` class properly returns `id` from `getId()`
 3. Test that the `Employee` class properly returns `payRate` from `getPayRate()`
 4. Test that the `Employee` class properly returns `employeeType` from `getEmployeeType()`
+5. Test that the `Employee` class properly returns `YTDEarnings` from `getYTDEarnings()`
+6. Test that the `Employee` class properly returns `YTDTaxesPaid` from `getYTDTaxesPaid()`
+7. Test that the `Employee` class properly returns `pretaxDeductions` from `getPretaxDeductions()`
+8. Test that the `PayStub` class properly returns `netPay` from `getPay()`
+9. Test that the `PayStub` class properly returns `taxesPaid` from `getTaxesPaid()`
+10. Test that the `PayStub` class properly converts to CSV format from `toCSV()`
+11. Test that the `TimeCard` class properly returns `employeeID` from `getEmployeeID()`
+12. Test that the `TimeCard` class properly returns `hoursWorked` from `getHoursWorked()`
+13. Test that the `Builder` class properly creates an HourlyEmployee from `buildEmployeeFromCSV()`
+14. Test that the `Builder` class properly creates a SalaryEmployee from `buildEmployeeFromCSV()`
+15. Test that the `Builder` class properly throws an error for invalid data in `buildEmployeeFromCSV()` as well as `buildTimeCardFromCSV()`
+16. Test that the `Builder` class properly creates a TimeCard from `buildTimeCardFromCSV()`
+17. Test that the `PayrollGenerator` class properly skips employees with negative hours.
+18. Test that the `PayrollGenerator` class properly processes employees and time cards to generate pay stubs.
 
 
 
