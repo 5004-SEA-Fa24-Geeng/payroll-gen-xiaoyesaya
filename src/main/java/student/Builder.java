@@ -30,33 +30,36 @@ public final class Builder {
         String type = parts[0];
         String name = parts[1];
         String id = parts[2];
-        double payRate, pretaxDeduction, YTDEarnings, YTDTaxesPaid;
-        try{
+        double payRate;
+        double pretaxDeduction;
+        double ytdEarnings;
+        double ytdTaxesPaid;
+        try {
             payRate = Double.parseDouble(parts[3]);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid pay rate");
         }
-        try{
+        try {
             pretaxDeduction = Double.parseDouble(parts[4]);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid pretax deduction");
         }
-        try{
-            YTDEarnings = Double.parseDouble(parts[5]);
+        try {
+            ytdEarnings = Double.parseDouble(parts[5]);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid YTDEarnings");
         }
-        try{
-            YTDTaxesPaid = Double.parseDouble(parts[6]);
+        try {
+            ytdTaxesPaid = Double.parseDouble(parts[6]);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid YTDTaxesPaid");
         }
 
 
         if (type.equals("HOURLY")) {
-            return new HourlyEmployee(name, id, payRate, YTDEarnings, YTDTaxesPaid, pretaxDeduction);
+            return new HourlyEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeduction);
         } else if (type.equals("SALARY")) {
-            return new SalaryEmployee(name, id, payRate, YTDEarnings, YTDTaxesPaid, pretaxDeduction);
+            return new SalaryEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeduction);
         } else {
             throw new IllegalArgumentException("Invalid type");
         }
@@ -78,7 +81,7 @@ public final class Builder {
         }
         String employeeID = parts[0];
         double hoursWorked;
-        try{
+        try {
             hoursWorked = Double.parseDouble(parts[1]);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid hours worked");
