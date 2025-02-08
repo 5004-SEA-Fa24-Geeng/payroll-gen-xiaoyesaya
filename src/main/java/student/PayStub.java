@@ -4,7 +4,7 @@ package student;
  * Represents a pay stub, containing payroll details for an employee.
  * Implements the IPayStub interface.
  */
-public class PayStub implements IPayStub{
+public class PayStub implements IPayStub {
     /** The name of the employee. */
     private final String employeeName;
     /** The net pay received by the employee for the pay period. */
@@ -12,9 +12,9 @@ public class PayStub implements IPayStub{
     /** The amount of taxes paid for the pay period. */
     private final double taxesPaid;
     /** The employee's year-to-date earnings. */
-    private final double YTDEarnings;
+    private final double ytdEarnings;
     /** The employee's year-to-date taxes paid. */
-    private final double YTDTaxesPaid;
+    private final double ytdTaxesPaid;
 
     /**
      * Constructs a PayStub object with the given payroll details.
@@ -22,15 +22,15 @@ public class PayStub implements IPayStub{
      * @param employeeName The name of the employee.
      * @param netPay The net pay received by the employee for the pay period.
      * @param taxesPaid The amount of taxes paid for the pay period.
-     * @param YTDEarnings The employee's year-to-date earnings.
-     * @param YTDTaxesPaid The employee's year-to-date taxes paid.
+     * @param ytdEarnings The employee's year-to-date earnings.
+     * @param ytdTaxesPaid The employee's year-to-date taxes paid.
      */
-    public PayStub(String employeeName, double netPay, double taxesPaid, double YTDEarnings, double YTDTaxesPaid) {
+    public PayStub(String employeeName, double netPay, double taxesPaid, double ytdEarnings, double ytdTaxesPaid) {
         this.employeeName = employeeName;
         this.netPay = netPay;
         this.taxesPaid = taxesPaid;
-        this.YTDEarnings = YTDEarnings;
-        this.YTDTaxesPaid = YTDTaxesPaid;
+        this.ytdEarnings = ytdEarnings;
+        this.ytdTaxesPaid = ytdTaxesPaid;
     }
 
     /**

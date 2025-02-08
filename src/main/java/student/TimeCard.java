@@ -4,7 +4,9 @@ package student;
  * Represents a time card that tracks the number of hours worked by an employee.
  */
 public class TimeCard implements ITimeCard {
+    /** The unique ID of the employee. */
     private final String employeeID;
+    /** The hours worked by employee. */
     private final double hoursWorked;
     /**
      * Constructs a TimeCard with the given employee ID and hours worked.
@@ -18,7 +20,7 @@ public class TimeCard implements ITimeCard {
     }
 
     /**
-     * Gets the employee ID
+     * Gets the employee ID.
      *
      * @return The employee ID as a string.
      */

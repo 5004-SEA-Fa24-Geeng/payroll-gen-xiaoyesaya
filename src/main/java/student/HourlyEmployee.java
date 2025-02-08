@@ -11,12 +11,14 @@ public class HourlyEmployee extends AbstractEmployee {
      * @param name            The name of the employee.
      * @param id              The unique ID of the employee.
      * @param payRate         The hourly pay rate of the employee.
-     * @param YTDEarnings     The year-to-date earnings of the employee.
-     * @param YTDTaxesPaid    The year-to-date taxes paid by the employee.
+     * @param ytdEarnings     The year-to-date earnings of the employee.
+     * @param ytdTaxesPaid    The year-to-date taxes paid by the employee.
      * @param pretaxDeductions The pretax deductions for the employee.
      */
-    public HourlyEmployee(String name, String id, double payRate, double YTDEarnings, double YTDTaxesPaid, double pretaxDeductions) {
-        super(name, id, payRate, YTDEarnings, YTDTaxesPaid, pretaxDeductions);
+    public HourlyEmployee(String name, String id, double payRate,
+                          double ytdEarnings, double ytdTaxesPaid,
+                          double pretaxDeductions) {
+        super(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
     }
 
     /**
