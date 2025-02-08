@@ -36,6 +36,6 @@ public class SalaryEmployee extends AbstractEmployee {
      */
     @Override
     protected double calculateGrossPay(double hoursWorked) {
-        return round(payRate / 24);
+        return round(getPayRate() / 24);
     }
 }
