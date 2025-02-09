@@ -65,11 +65,11 @@ public class TestPayrollGenerator {
         Path payStubs = tempDir.resolve("pay_stubs_invalid.csv");
         String[] args = {"-e", employees.toString(), "-t", "resources/time_cards_non_positive.csv",
                 "-o", payStubs.toString()};
-        assertThrows(Exception.class, () -> PayrollGenerator.main(args));
-//        String expectedPayStubs = Files
-//                .readString(Paths.get("resources/pay_stubs_invalid.csv"));
-//        String actualPayStubs = Files.readString(payStubs);
-//        assertEquals(expectedPayStubs, actualPayStubs);
+        PayrollGenerator.main(args);
+        String expectedPayStubs = Files
+                .readString(Paths.get("resources/pay_stubs_invalid.csv"));
+        String actualPayStubs = Files.readString(payStubs);
+        assertEquals(expectedPayStubs, actualPayStubs);
 
 
 

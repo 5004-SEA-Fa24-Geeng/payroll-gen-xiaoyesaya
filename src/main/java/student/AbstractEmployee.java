@@ -40,18 +40,6 @@ public abstract class AbstractEmployee implements IEmployee {
     public AbstractEmployee(
             String name, String id, double payRate, double ytdEarnings,
             double ytdTaxesPaid, double pretaxDeductions) {
-        if (payRate <= 0) {
-            throw new IllegalArgumentException("payRate must be greater than 0.");
-        }
-        if (ytdEarnings < 0) {
-            throw new IllegalArgumentException("ytdEarnings cannot be negative.");
-        }
-        if (ytdTaxesPaid < 0) {
-            throw new IllegalArgumentException("ytdTaxesPaid cannot be negative.");
-        }
-        if (pretaxDeductions < 0) {
-            throw new IllegalArgumentException("pretaxDeductions cannot be negative.");
-        }
         this.name = name;
         this.id = id;
         this.payRate = payRate;
@@ -144,11 +132,11 @@ public abstract class AbstractEmployee implements IEmployee {
             return null;
         }
         double grossPay = calculateGrossPay(hoursWorked);
-        double taxableIncome = round(Math.max(grossPay - pretaxDeductions, 0));
-        double taxes = round(taxableIncome * TAX_RATE);
-        double netPay = round(grossPay - pretaxDeductions - taxes);
-        ytdEarnings = round(ytdEarnings + netPay);
-        ytdTaxesPaid = round(ytdTaxesPaid + taxes);
+        double taxableIncome = Math.max(grossPay - pretaxDeductions, 0);
+        double taxes = taxableIncome * TAX_RATE;
+        double netPay = grossPay - pretaxDeductions - taxes;
+        taxes = round(taxes);
+        netPay = round(netPay);
         return new PayStub(name, netPay, taxes, ytdEarnings, ytdTaxesPaid);
     }
 

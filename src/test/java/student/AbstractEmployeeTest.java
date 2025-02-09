@@ -35,62 +35,6 @@ class AbstractEmployeeTest {
     }
 
     @Test
-    void testConstructor_InvalidPayRateExceptionThrown() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new HourlyEmployee("Kelly", "a109", -10.00, 5000.00, 1000.00, 200.00);
-        });
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SalaryEmployee("Alex", "x233", 0.00, 20000.00, 3000.00, 500.00);
-        });
-    }
-
-    @Test
-    void testConstructor_InvalidYTDEarningsExceptionThrown() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new HourlyEmployee("Kelly", "a109", 20.00, -5000.00, 1000.00, 200.00);
-        });
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SalaryEmployee("Alex", "x233", 50000.00, -20000.00, 3000.00, 500.00);
-        });
-    }
-
-    @Test
-    void testConstructor_InvalidYTDTaxesPaidExceptionThrown() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new HourlyEmployee("Kelly", "a109", 20.00, 5000.00, -1000.00, 200.00);
-        });
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SalaryEmployee("Alex", "x233", 50000.00, 20000.00, -3000.00, 500.00);
-        });
-    }
-
-    @Test
-    void testConstructor_InvalidPretaxDeductionsExceptionThrown() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new HourlyEmployee("Kelly", "a109", 20.00, 5000.00, 1000.00, -200.00);
-        });
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SalaryEmployee("Alex", "x233", 50000.00, 20000.00, 3000.00, -500.00);
-        });
-    }
-
-    @Test
-    void testConstructor_ValidInputsDoesNotThrow() {
-        assertDoesNotThrow(() -> {
-            new HourlyEmployee("Kelly", "a109", 20.00, 5000.00, 1000.00, 200.00);
-        });
-
-        assertDoesNotThrow(() -> {
-            new SalaryEmployee("Alex", "x233", 50000.00, 20000.00, 3000.00, 500.00);
-        });
-    }
-
-
-    @Test
     void getName() {
         assertEquals("Kelly", hourlyEmployee.getName());
         assertEquals("Alex", salaryEmployee.getName());

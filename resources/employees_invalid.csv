@@ -1,3 +1,3 @@
 employee_type,name,ID,payRate,pretaxDeductions,YTDEarnings,YTDTaxesPaid
-HOURLY,Mao Mao,s192,20.00,100,5000,1000
-SALARY,Jin Shi,j124,0,200,8000,1200
+HOURLY,Mao Mao,a299,-5,-100,-100,-200
+SALARY,Jin Shi,j124,0,0,0,0

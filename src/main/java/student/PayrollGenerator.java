@@ -72,6 +72,9 @@ public final class PayrollGenerator {
         for (ITimeCard timeCard : timeCardList) {
             String employeeID = timeCard.getEmployeeID();
             double hoursWorked = timeCard.getHoursWorked();
+            if (hoursWorked < 0) {
+                continue;
+            }
             IEmployee employee = employees.stream()
                     .filter(e -> e.getID().equals(employeeID))
                     .findFirst().
