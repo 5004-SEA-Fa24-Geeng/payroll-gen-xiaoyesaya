@@ -137,6 +137,8 @@ public abstract class AbstractEmployee implements IEmployee {
         double netPay = grossPay - pretaxDeductions - taxes;
         taxes = round(taxes);
         netPay = round(netPay);
+        ytdEarnings = round(ytdEarnings + grossPay);
+        ytdTaxesPaid = round(ytdTaxesPaid + taxes);
         return new PayStub(name, netPay, taxes, ytdEarnings, ytdTaxesPaid);
     }
 
