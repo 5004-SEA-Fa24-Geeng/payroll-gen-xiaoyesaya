@@ -53,10 +53,10 @@ Think through the issue / making sure to cite any resources you use to help you 
 The answer to this is mostly open. We ask that you cite at least two sources to show your understanding of the issue. The TAs will also give feedback on your answer, though will be liberal in grading as long as you show a good faith effort to understand the issue and making an effort to think about how your design to could help meet your employer's goals of salary equity. 
 
 
-The fact that the gap of gender pay has been unchanged for about twenty years that women are only receiving 80 percent of man's salary really surprised me [^1]. 
-I believe that including demographic information data points such as gender and years of experience in payroll system will be beneficial to find whether there is pay gap between different gender in a systematic way. 
-I think the comparisons between employees should be analyzed right after the calculation of gross pay before applying any pretax deductions or taxes because we are comparing employees' base salaries and we don't want interference from other benefits. 
-Moreover, a research notes that women are less likely to get promote when starting from the same level of position [^2]. Therefore, we can add a function to track the salary change over years. In this way, we can spot not only pay gaps right away but also how salaries change over time for different groups. This will help make sure everyone gets fair raises and promotions, preventing hidden biases from growing into significant wage gaps.
+The fact that the gender pay gap has remained unchanged for about twenty years, with women receiving only 80 percent of a man's salary, really surprised me [^1].
+I believe that including demographic data points such as gender and years of experience in the payroll system will be beneficial in identifying whether there is a pay gap between different genders in a systematic way.
+I think employee salary comparisons should be analyzed right after calculating gross pay, before applying any pretax deductions or taxes, because we are comparing employees' base salaries and do not want interference from other benefits.
+Moreover, research notes that women are less likely to get promoted when starting from the same level of position [^2]. Therefore, we can add a function to track salary changes over the years. In this way, we can spot not only pay gaps right away but also how salaries change over time for different groups. This will help make sure everyone gets fair raises and promotions, preventing hidden biases from growing into significant wage gaps.
 ## References
 
 [^1]: Gender pay gap in U.S. hasn’t changed much in two decades. https://www.pewresearch.org/short-reads/2023/03/01/gender-pay-gap-facts/. Accessed: 2025-02-08.
