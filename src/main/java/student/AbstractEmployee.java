@@ -35,7 +35,6 @@ public abstract class AbstractEmployee implements IEmployee {
      * @param ytdEarnings Year-to-date earnings (cannot be negative).
      * @param ytdTaxesPaid Year-to-date taxes paid (cannot be negative).
      * @param pretaxDeductions Pre-tax deductions (cannot be negative).
-     * @throws IllegalArgumentException if any input is invalid.
      */
     public AbstractEmployee(
             String name, String id, double payRate, double ytdEarnings,

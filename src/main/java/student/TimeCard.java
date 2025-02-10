@@ -20,7 +20,7 @@ public class TimeCard implements ITimeCard {
     }
 
     /**
-     * Gets the employee ID.
+     * Gets the employee ID.`1`
      *
      * @return The employee ID as a string.
      */

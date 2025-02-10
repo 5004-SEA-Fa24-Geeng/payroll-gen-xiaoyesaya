@@ -170,7 +170,126 @@ Go through your completed code, and update your class diagram to reflect the fin
 > [!WARNING]
 > If you resubmit your assignment for manual grading, this is a section that often needs updating. You should double check with every resubmit to make sure it is up to date.
 
+```mermaid
+classDiagram
+    AbstractEmployee <|-- HourlyEmployee
+    AbstractEmployee <|-- SalaryEmployee
+    IEmployee <|.. AbstractEmployee : implements
+    IPayStub <|.. PayStub : implements
+    ITimeCard <|.. TimeCard : implements
+    PayrollGenerator ..> FileUtil : uses
+    PayrollGenerator ..> Builder : uses
+    PayrollGenerator ..> IPayStub : uses
+    PayrollGenerator *-- Arguments : contains
+    IEmployee ..> IPayStub : uses
+    Builder ..> ITimeCard : creates
+    Builder ..> IEmployee : creates
+    class IEmployee {
+        <<interface>>
+        + getName() String
+        + getID() String
+        + getPayRate() double
+        + getEmployeeType() String
+        + getYTDEarnings() double
+        + getYTDTaxesPaid() double
+        + getPretaxDeductions() double
+        + runPayroll(double hoursWorked) IPayStub
+        + toCSV() String
+    }
+    class IPayStub {
+        <<interface>>
+        + getPay() double
+        + getTaxesPaid() double
+        + toCSV() String
 
+    }
+    class ITimeCard{
+        <<interface>>
+        + getEmployeeID() String
+        + getHoursWorked() double
+    }
+    class FileUtil{
+        - FileUtil
+        + static final String EMPLOYEE_HEADER()
+        + static final String PAY_STUB_HEADER()
+        + static readFileToList(String file) List~String~
+        + static writeFile(String outFile, List<String> lines) void
+        + static writeFile(String outFile, List<String> lines, boolean backup) void
+    }
+    class Builder{
+        - Builder
+        + static buildEmployeeFromCSV(String csv) IEmployee
+        + static buildTimeCardFromCSV(String csv) ITimeCard 
+
+    }
+    class AbstractEmployee{
+        <<abstract>>
+        - name: String
+        - id: String
+        - payRate: double
+        - ytdEarnings: double
+        - ytdTaxesPaid: double
+        - pretaxDeductions: double
+        - TAX_RATE: double
+        # calculateGrossPay: double
+        # round: double
+        + getName() String
+        + getID() String
+        + getPayRate() double
+        + getEmployeeType() String
+        + getYTDEarnings() double
+        + getYTDTaxesPaid() double
+        + getPretaxDeductions() double
+        + runPayroll(hoursWorked: double) IPayStub
+        + toCSV() String
+    }
+    class HourlyEmployee{
+        # calculateGrossPay: double
+        + HourlyEmployee(String name, String id, double payRate, double ytdEarnings, double ytdTaxesPaid, double pretaxDeductions)
+        + getEmployeeType() String
+    }
+    class SalaryEmployee{
+        # calculateGrossPay: double
+        + SalaryEmployee(String name, String id, double payRate, double ytdEarnings, double ytdTaxesPaid, double pretaxDeductions)
+        + getEmployeeType() String
+    }
+    class PayStub{
+        - employeeName: String
+        - netPay: double
+        - taxesPaid: double
+        - ytdEarnings: double
+        - ytdTaxesPaid: double
+        + PayStub(String employeeName, double netPay, double taxesPaid, double ytdEarnings, double ytdTaxesPaid)
+        + getPay() double
+        + getTaxesPaid() double
+        + toCSV() String
+    }
+    class TimeCard {
+        - employeeID: String
+        - hoursWorked: double
+        + TimeCard(String employeeID, double hoursWorked)
+        + getEmployeeID() String
+        + getHoursWorked() double
+    }
+    class PayrollGenerator {
+        - DEFAULT_EMPLOYEE_FILE: String
+        - DEFAULT_PAYROLL_FILE: String
+        - DEFAULT_TIME_CARD_FILE: String
+        - PayrollGenerator
+        + main(args: String[]) void
+    }
+    class Arguments {
+        - employeeFile: String
+        - payrollFile: String
+        - timeCards: String
+        - Arguments
+        + getEmployeeFile() String
+        + getPayrollFile() String
+        + getTimeCards() String
+        + printHelp() void
+        + process(args: String[]) Arguments
+    }
+```
 
 
 
@@ -180,3 +299,6 @@ Go through your completed code, and update your class diagram to reflect the fin
 > The value of reflective writing has been highly researched and documented within computer science, from learning new information to showing higher salaries in the workplace. For this next part, we encourage you to take time, and truly focus on your retrospective.
 
 Take time to reflect on how your design has changed. Write in *prose* (i.e. do not bullet point your answers - it matters in how our brain processes the information). Make sure to include what were some major changes, and why you made them. What did you learn from this process? What would you do differently next time? What was the most challenging part of this process? For most students, it will be a paragraph or two. 
+
+I didn't make any large changes to the whole design. The changes are made in abstractEmployee class, the autograde asks me to use private for fields instead of protected. Therefore, I change all of them to private. Since I have runPayRoll in abstractEmployee class, I also assigned the TAX_RATE as a final constant to avoid magic number. Also to apply Bigdecimal and convert to round, I added a round method. Also, I forgot to include toCSV() in abstractEmployee class considering how it implements the IEmployee.
+From this process, i learned that the the first draft will not be perfect and there are many adjustments that will be made. For next time, I wonder if it will be possible to have a payroll calculator outside the abstractemployee class to make the payroll calculation independently.
