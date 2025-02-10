@@ -31,8 +31,8 @@ public class SalaryEmployee extends AbstractEmployee {
     }
 
     /**
-     * Calculates the gross pay for a salaried employee per pay period.
-     * Salaried employees receive their salary divided into 24 equal payments (bi-monthly pay schedule).
+     * Calculates the gross pay for a salary employee per pay period.
+     * Salary employees receive their salary twice every month.
      * @param hoursWorked Number of hours worked in the pay period
      * @return The rounded gross pay amount
      */

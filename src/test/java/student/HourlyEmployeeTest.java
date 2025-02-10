@@ -26,4 +26,9 @@ class HourlyEmployeeTest {
     void calculateGrossPay_over_time(){
         assertEquals(950.00, hourlyEmployee.calculateGrossPay(45), 0.01);
     }
+
+    @Test
+    void calculateGrossPay_zero_hour() {
+        assertEquals(0.00, hourlyEmployee.calculateGrossPay(0), 0.01);
+    }
 }

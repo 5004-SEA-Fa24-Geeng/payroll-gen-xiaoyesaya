@@ -2,6 +2,7 @@ package student;
 
 /**
  * Represents a time card that tracks the number of hours worked by an employee.
+ * Implements the ITimeCard interface.
  */
 public class TimeCard implements ITimeCard {
     /** The unique ID of the employee. */

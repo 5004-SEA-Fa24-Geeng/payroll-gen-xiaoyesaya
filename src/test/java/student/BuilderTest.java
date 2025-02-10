@@ -38,7 +38,7 @@ class BuilderTest {
 
     @Test
     void buildEmployeeFromCSV_InvalidInputExceptionThrown() {
-        String csv = ",Kelly,a109,20.00,5000.00";
+        String csv = ",Madoka Kaname,a666,20.00,5000.00";
         assertThrows(IllegalArgumentException.class, () -> Builder.buildEmployeeFromCSV(csv));
     }
 
@@ -63,13 +63,13 @@ class BuilderTest {
 
     @Test
     void buildTimeCardFromCSV_InvalidInputExceptionThrown() {
-        String csv = "a109";
+        String csv = "a304";
         assertThrows(IllegalArgumentException.class, () -> Builder.buildTimeCardFromCSV(csv));
     }
 
     @Test
     void buildTimeCardFromCSV_ValidInputDoesNotThrow() {
-        String csv = "a109,40.5";
+        String csv = "a304,20.5";
         assertDoesNotThrow(() -> {Builder.buildTimeCardFromCSV(csv);});
     }
 }

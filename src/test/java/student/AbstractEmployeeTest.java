@@ -10,21 +10,19 @@ class AbstractEmployeeTest {
     private SalaryEmployee salaryEmployee;
     @BeforeEach
     void setUp() {
-        hourlyEmployee = new HourlyEmployee("Kelly", "a109", 20.00, 5000.00, 1000.00, 200.00);
+        hourlyEmployee = new HourlyEmployee("Kelly", "a109", 20.00, 5000.00, 1000.00, 0.00);
         salaryEmployee = new SalaryEmployee("Alex", "x233", 50000.00, 20000.00, 3000.00, 500.00);
     }
 
     @Test
     void testConstructor() {
-        IEmployee hourlyEmployee = new HourlyEmployee("Kelly", "a109", 20.00, 5000.00, 1000.00, 200.00);
-        IEmployee salaryEmployee = new SalaryEmployee("Alex", "x233", 50000.00, 20000.00, 3000.00, 500.00);
 
         assertEquals("Kelly", hourlyEmployee.getName());
         assertEquals("a109", hourlyEmployee.getID());
         assertEquals(20.00, hourlyEmployee.getPayRate(), 0.01);
         assertEquals(5000.00, hourlyEmployee.getYTDEarnings(), 0.01);
         assertEquals(1000.00, hourlyEmployee.getYTDTaxesPaid(), 0.01);
-        assertEquals(200.00, hourlyEmployee.getPretaxDeductions(), 0.01);
+        assertEquals(0.00, hourlyEmployee.getPretaxDeductions(), 0.01);
 
         assertEquals("Alex", salaryEmployee.getName());
         assertEquals("x233", salaryEmployee.getID());
@@ -66,7 +64,7 @@ class AbstractEmployeeTest {
 
     @Test
     void getPretaxDeductions() {
-        assertEquals(200.00, hourlyEmployee.getPretaxDeductions(), 0.01);
+        assertEquals(0.00, hourlyEmployee.getPretaxDeductions(), 0.01);
         assertEquals(500.00, salaryEmployee.getPretaxDeductions(), 0.01);
     }
 
@@ -96,13 +94,21 @@ class AbstractEmployeeTest {
         assertEquals(expectedTaxes, paystub.getTaxesPaid(), 0.01);
         assertEquals(expectedYTDEarnings, hourlyEmployee.getYTDEarnings(), 0.01);
         assertEquals(expectedYTDTaxesPaid, hourlyEmployee.getYTDTaxesPaid(), 0.01);
+    }
 
-
+    @Test
+    void runPayrollWithZeroHours(){
+        IPayStub paystub = hourlyEmployee.runPayroll(0);
+        assertNotNull(paystub);
+        assertEquals(0.00, paystub.getPay(), 0.01);
+        assertEquals(0.00, paystub.getTaxesPaid(), 0.01);
+        assertEquals(hourlyEmployee.getYTDEarnings(), 5000.00, 0.01);
+        assertEquals(hourlyEmployee.getYTDTaxesPaid(), 1000.00, 0.01);
     }
 
     @Test
     void toCSV() {
-        String expectedHourlyCSV = "HOURLY,Kelly,a109,20.00,200.00,5000.00,1000.00";
+        String expectedHourlyCSV = "HOURLY,Kelly,a109,20.00,0.00,5000.00,1000.00";
         String expectedSalaryCSV = "SALARY,Alex,x233,50000.00,500.00,20000.00,3000.00";
 
         assertEquals(expectedHourlyCSV, hourlyEmployee.toCSV());
