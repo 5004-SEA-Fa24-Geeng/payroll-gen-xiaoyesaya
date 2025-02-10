@@ -9,15 +9,18 @@ https://github.com/5004-SEA-Fa24-Geeng/payroll-gen-xiaoyesaya
 
 How many hours did it take you to complete this assignment (estimate)?
 
+10
+
 Did you collaborate with any other students/TAs/Professors? If so, tell us who and in what
 capacity.
 
 * one per row, add more if needed
+No
   
 Did you use any external resources (you do not have to cite in class material)? (Cite them below)
 
 * one row per resource
-
+No
 
 (Optional) What was your favorite part of the assignment?
 
